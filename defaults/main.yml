@@ -1,0 +1,4 @@
+---
+selinux_conf: /etc/selinux/config
+selinux_policy: targeted
+selinux_state: enforcing
