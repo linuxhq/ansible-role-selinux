@@ -1,14 +1,20 @@
 ---
-- name: Install libselinux-python package
+- name: Ensure selinux packages are installed
   tags: selinux
-  yum: name=libselinux-python
-       state=present
-       update_cache=yes
-  register: libselinux_python_yum
+  yum:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  register: selinux_yum
+  with_items:
+    - libselinux-python
+    - selinux-policy
 
 - name: Configure selinux policy and state
   tags: selinux
-  selinux: conf={{ selinux_conf }}
-           policy={{ selinux_policy }}
-           state={{ selinux_state }}
-  when: libselinux_python_yum|success
+  selinux:
+    conf: "{{ selinux_conf }}"
+    policy: "{{ selinux_policy }}"
+    state: "{{ selinux_state }}"
+  when: selinux_yum|success
+...
