@@ -1,17 +1,18 @@
 ---
-- name: Ensure selinux packages are installed
+- name: Ensure the the selinux packages are installed
   tags: selinux
+  become: true
   yum:
     name: "{{ item }}"
     state: present
-    update_cache: yes
   register: selinux_yum
   with_items:
     - libselinux-python
     - selinux-policy
 
-- name: Configure selinux policy and state
+- name: Applying selinux policy and state configurations
   tags: selinux
+  become: true
   selinux:
     conf: "{{ selinux_conf }}"
     policy: "{{ selinux_policy }}"
