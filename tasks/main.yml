@@ -1,5 +1,5 @@
 ---
-- name: Ensure the the selinux packages are installed
+- name: Ensure that the selinux packages are installed
   tags: selinux
   become: true
   yum:
@@ -17,5 +17,5 @@
     conf: "{{ selinux_conf }}"
     policy: "{{ selinux_policy }}"
     state: "{{ selinux_state }}"
-  when: selinux_yum|success
+  when: selinux_yum is success
 ...
