@@ -1,6 +1,8 @@
 # ansible-role-selinux
 
 [![Build Status](https://travis-ci.org/linuxhq/ansible-role-selinux.svg?branch=master)](https://travis-ci.org/linuxhq/ansible-role-selinux)
+[![Ansible Galaxy](https://img.shields.io/badge/ansible--galaxy-selinux-blue.svg?style=flat)](https://galaxy.ansible.com/linuxhq/selinux)
+[![License](https://img.shields.io/badge/license-GPLv3-brightgreen.svg?style=flat)](COPYING)
 
 RHEL/CentOS - Security-Enhanced Linux
 
