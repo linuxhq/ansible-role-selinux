@@ -1,6 +1,7 @@
 ---
 dependencies: []
 galaxy_info:
+  role_name: selinux
   author: tkimball83
   description: RHEL/CentOS - Security-Enhanced Linux
   license: GPLv3
@@ -12,6 +13,5 @@ galaxy_info:
         - 6
         - 7
   galaxy_tags:
-    - security
     - selinux
 ...
