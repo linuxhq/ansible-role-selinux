@@ -6,7 +6,7 @@
     name: "{{ item }}"
     state: present
   register: selinux_yum
-  with_items:
+  loop:
     - libselinux-python
     - selinux-policy
 
@@ -17,5 +17,16 @@
     conf: "{{ selinux_conf }}"
     policy: "{{ selinux_policy }}"
     state: "{{ selinux_state }}"
+  register: selinux_module
   when: selinux_yum is success
+
+- name: Attempting to reboot host, if applicable
+  tags: selinux
+  become: true
+  reboot:
+    reboot_timeout: "{{ selinux_reboot_timeout }}"
+  when:
+    - selinux_module is changed
+    - selinux_module.reboot_required|bool
+    - selinux_reboot|bool
 ...

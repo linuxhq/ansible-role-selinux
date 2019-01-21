@@ -16,6 +16,8 @@ Available variables are listed below, along with default values:
 
     selinux_conf: /etc/selinux/config
     selinux_policy: targeted
+    selinux_reboot: false
+    selinux_reboot_timeout: 600
     selinux_state: enforcing
 
 ## Dependencies
@@ -28,6 +30,7 @@ None
       roles:
         - role: linuxhq.selinux
           selinux_state: disabled
+          selinux_reboot: true
 
 ## License
 
