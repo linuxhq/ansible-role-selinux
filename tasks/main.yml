@@ -7,7 +7,7 @@
     state: present
   register: selinux_yum
   loop:
-    - libselinux-python
+    - "{% if ansible_distribution_major_version|int >= 8 %}python3-libselinux{% else %}libselinux-python{%endif%}"
     - selinux-policy
 
 - name: Applying selinux policy and state configurations
