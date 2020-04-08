@@ -1,14 +1,29 @@
 ---
-- name: Ensure that the selinux packages are installed
+- name: Ensure the selinux packages are installed (<= el7)
   tags: selinux
   become: true
   yum:
-    name: "{{ item }}"
+    name: "{{ selinux_packages }}"
     state: present
   register: selinux_yum
-  loop:
-    - libselinux-python
-    - selinux-policy
+  vars:
+    selinux_packages:
+      - libselinux-python
+      - selinux-policy
+  when: ansible_distribution_major_version|int <= 7
+
+- name: Ensure the selinux packages are installed (>= el8)
+  tags: selinux
+  become: true
+  yum:
+    name: "{{ selinux_packages }}"
+    state: present
+  register: selinux_yum
+  vars:
+    selinux_packages:
+      - python3-libselinux
+      - selinux-policy
+  when: ansible_distribution_major_version|int >= 8
 
 - name: Applying selinux policy and state configurations
   tags: selinux
