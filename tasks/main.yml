@@ -5,7 +5,6 @@
   yum:
     name: "{{ selinux_packages }}"
     state: present
-  register: selinux_yum
   vars:
     selinux_packages:
       - libselinux-python
@@ -18,7 +17,6 @@
   yum:
     name: "{{ selinux_packages }}"
     state: present
-  register: selinux_yum
   vars:
     selinux_packages:
       - python3-libselinux
@@ -33,7 +31,6 @@
     policy: "{{ selinux_policy }}"
     state: "{{ selinux_state }}"
   register: selinux_module
-  when: selinux_yum is success
 
 - name: Attempting to reboot host, if applicable
   tags: selinux
